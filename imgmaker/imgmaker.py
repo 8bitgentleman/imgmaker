@@ -27,9 +27,9 @@ class imgmaker:
         assert isinstance(scale, int), "scale must be an integer."
         self.scale = scale
         self.env = build_jinja_env()
-
+        binaryPath = '/Applications/Brave Browser.app/Contents/MacOS/Brave Browser'
         chrome_options = Options()
-
+        chrome_options.binary_location = binaryPath
         args = [
             "--headless",
             "--hide-scrollbars",
@@ -90,7 +90,7 @@ class imgmaker:
                 f.write(html)
 
         self.driver.get(f"data:text/html;charset=utf-8,{html}")
-
+        # time.sleep(2)
         if height is None or height == -1:
             self.driver.set_window_size(width, 1)
             height = self.driver.find_element_by_tag_name("html").size["height"]
